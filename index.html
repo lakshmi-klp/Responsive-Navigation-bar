@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>50-Level Quiz River Adventure</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+  <style id="particle-styles">
+    /* Dynamically generated particle styles */
+  </style>
+  <style id="raindrop-styles">
+    /* Dynamically generated raindrop styles */
+  </style>
+</head>
+<body>
+  <div class="center">
+    <!-- Generate 50 .thing elements -->
+    <script>
+      const styleSheet = document.getElementById('particle-styles');
+      let cssRules = '';
+      for (let i = 1; i <= 50; i++) {
+        document.write('<div class="thing"></div>');
+        cssRules += `
+          .thing:nth-child(${i}) {
+            animation-name: stuff-${i};
+            animation-delay: ${i * 0.005}s;
+            color: hsl(${i * -1}deg, 100%, 50%);
+            transform: 
+              rotateZ(${i * 45}deg)
+              translate3d(${i * 10}px, ${i * 10}px, ${i * -0.075}px);
+          }
+          @keyframes stuff-${i} {
+            100% {
+              color: hsl(${i * 1}deg, 100%, 70%);
+              transform: 
+                rotateZ(${i * 90}deg)
+                rotateX(${i * 1}deg)
+                translate3d(${i * -20}px, ${i * 20}px, ${i * -0.075}px);
+            }
+          }
+        `;
+      }
+      styleSheet.textContent = cssRules;
+      console.log('Generated 50 particle elements and CSS rules');
+    </script>
+  </div>
+
+  <!-- Raindrop Effect -->
+  <div class="rain">
+    <script>
+      const rainStyleSheet = document.getElementById('raindrop-styles');
+      let rainRules = '';
+      for (let i = 1; i <= 30; i++) {
+        document.write('<div class="raindrop"></div>');
+        rainRules += `
+          .raindrop:nth-child(${i}) {
+            left: ${Math.random() * 100}%;
+            animation: fall ${1 + Math.random() * 2}s linear infinite;
+            animation-delay: ${Math.random() * 2}s;
+          }
+        `;
+      }
+      rainStyleSheet.textContent = rainRules;
+      console.log('Generated 30 raindrop elements');
+    </script>
+  </div>
+
+  <!-- Front Page -->
+  <div id="front-page" class="front-page">
+    <h1 class="text-4xl font-bold text-white mb-8 animate-pulse">50-Level Quiz River Adventure 🌊</h1>
+    <button id="start-quiz-btn" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transform hover:scale-105 transition-transform text-xl">Start Quiz</button>
+  </div>
+
+  <!-- Level Selection and Quiz Pages -->
+  <div id="quiz-app" class="hidden">
+    <div class="quiz-card">
+      <div id="level-selection" class="mb-6">
+        <h2 class="text-lg font-semibold mb-4 text-gray-800 text-center">Navigate the River of Challenges</h2>
+        <div id="levels" class="level-path"></div>
+      </div>
+      <div id="quiz" class="hidden">
+        <h2 class="text-lg font-semibold mb-2 text-gray-800">Challenge <span id="current-level"></span> - Question <span id="current-question-num"></span>/15</h2>
+        <h3 id="question" class="text-md mb-4 text-gray-800 animate-fade-in"></h3>
+        <div id="options" class="mb-4"></div>
+        <button id="next-btn" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transform hover:scale-105 transition-transform">Next</button>
+      </div>
+      <div id="result" class="hidden text-center">
+        <h2 class="text-xl font-bold text-gray-800">Challenge <span id="result-level"></span> Complete! 🎉</h2>
+        <p class="text-lg text-gray-800">Your Score: <span id="score"></span>/15</p>
+        <p id="pass-message" class="text-green-600"></p>
+        <button id="next-level-btn" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 mt-4 hidden transform hover:scale-105 transition-transform">Next Challenge</button>
+        <button id="retry-btn" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 mt-4 transform hover:scale-105 transition-transform">Retry Challenge</button>
+        <button id="back-to-levels-btn" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 mt-4 transform hover:scale-105 transition-transform">Back to Challenges</button>
+      </div>
+    </div>
+
+    <div id="modal" class="modal">
+      <div class="modal-content animate-slide-in">
+        <h2 class="text-xl font-bold mb-4">Incorrect Answers 📝</h2>
+        <div id="modal-body"></div>
+        <button id="modal-close" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-4 transform hover:scale-105 transition-transform">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

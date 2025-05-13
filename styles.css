@@ -1,0 +1,201 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: black;
+  min-height: 100vh;
+  overflow: auto;
+}
+
+.center {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.thing {
+  animation: thingy 3s ease-in infinite alternate;
+  border-radius: 50%;
+  background: currentColor;
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  top: 50%;
+  left: 50%;
+}
+
+@keyframes thingy {
+  0% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+.rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.raindrop {
+  position: absolute;
+  width: 2px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 2px;
+  top: -10px;
+}
+
+@keyframes fall {
+  0% { top: -10px; opacity: 1; }
+  100% { top: 100%; opacity: 0.3; }
+}
+
+.front-page {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  color: white;
+  font-size: 1.25rem;
+}
+
+.front-page h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.front-page button {
+  background-color: #3b82f6;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.3s;
+}
+
+.front-page button:hover {
+  background-color: #2563eb;
+  transform: scale(1.05);
+}
+
+.quiz-card {
+  max-width: 90%;
+  margin: 20px auto;
+  padding: 20px;
+  background: rgba(30, 30, 30, 0.85); /* Dark transparent */
+  color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(219, 215, 215, 0.9);
+  position: relative;
+  z-index: 2;
+}
+
+.level-path {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 200px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 20px 0;
+  background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"%3E%3Cpath fill="%230288d1" fill-opacity="0.5" d="M0,192L48,186.7C96,181,192,171,288,165.3C384,160,480,160,576,176C672,192,768,224,864,224C960,224,1056,192,1152,186.7C1248,181,1344,203,1392,213.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"%3E%3C/path%3E%3C/svg%3E') repeat-x;
+  background-size: 1440px 320px;
+  background-position: top;
+  position: relative;
+}
+
+.level-button {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+  animation: bob 2s ease-in-out infinite;
+  z-index: 3;
+}
+
+.level-button.unlocked {
+  background: #2563eb;
+  color: white;
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.7);
+}
+
+.level-button.locked {
+  background: hwb(0 90% 8%);
+  color: #151212;
+  cursor: not-allowed;
+}
+
+@keyframes bob {
+  50%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.option {
+  margin: 10px 0;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 4;
+}
+
+.modal-content {
+  background: rgba(30, 30, 30, 0.95);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-in;
+}
+
+.hidden {
+  display: none !important;
+}
